@@ -20,7 +20,7 @@ class Load : AppCompatActivity() {
             insets
         }
         //немного симуляция загрузки по нармальному грузить данные с БД нужно, но в данный момент базы нет
-        object : CountDownTimer(1000, 100){
+        object : CountDownTimer(2500, 100){
             override fun onFinish() {
 //                по окончанию таймера переходим на экран авторизации
                 Log.v("Load", "таймер завершился, переход на авторизацию")
@@ -29,11 +29,9 @@ class Load : AppCompatActivity() {
             }
 
             override fun onTick(millisUntilFinished: Long) {
-                TODO("Not yet implemented")
             }
 
         }.start()
-
 
     }
 }

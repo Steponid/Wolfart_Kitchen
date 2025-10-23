@@ -29,6 +29,7 @@
         <item name="android:paddingStart">14dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textColorHint">#4DFFFFFF</item>
     </style>
 
     <style name="theme.Fudelo" parent="Base.Theme.Fudelo" />
