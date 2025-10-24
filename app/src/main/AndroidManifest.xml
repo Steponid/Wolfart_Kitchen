@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/theme.Fudelo">
         <activity
+            android:name=".ButNav"
+            android:exported="false" />
+        <activity
+            android:name=".Reg"
+            android:exported="false" />
+        <activity
             android:name=".Auth"
             android:exported="false" />
         <activity
