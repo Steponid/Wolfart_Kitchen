@@ -42,7 +42,7 @@ class Auth : AppCompatActivity() {
         passSel.setOnClickListener {
             //еслси уже активен то
             if (passSel.isActivated) {
-//                меняем на не активный
+                //меняем на не активный
                 passSel.isActivated = false
                 //открываем пароль
                 pass.transformationMethod = PasswordTransformationMethod.getInstance()
