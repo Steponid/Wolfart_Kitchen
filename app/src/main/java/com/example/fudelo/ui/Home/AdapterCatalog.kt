@@ -3,42 +3,57 @@ package com.example.fudelo.ui.Home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.fudelo.R
+import com.example.fudelo.ui.Recipe
 
- data class catalog(
-     val id: Int,
-     val text: String,
-     val img: Int
- )
 class AdapterCatalog(
-    private val catalogList: List<catalog>,
-    private val onItemClick: (catalog) -> Unit
-) : RecyclerView.Adapter<AdapterCatalog.CatalogViewHolder>() {
+    private val recipes: List<Recipe>,
+    private val onItemClick: (Recipe) -> Unit,
+    private val onFavoriteClick: (Recipe) -> Unit
+) : RecyclerView.Adapter<AdapterCatalog.RecipeViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.adapter_catalog_rec, parent, false)
-        return CatalogViewHolder(view)
+        return RecipeViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
-        val item = catalogList[position]
-        holder.bind(item)
-        holder.itemView.setOnClickListener { onItemClick(item) }
+    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
+        val recipe = recipes[position]
+        holder.bind(recipe)
     }
 
-    override fun getItemCount(): Int = catalogList.size
 
-    inner class CatalogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.textView9)
-//        private val imageView: ImageView = itemView.findViewById(R.id.imageViewCatalogItem)
+    override fun getItemCount(): Int = recipes.size
 
-        fun bind(catalogItem: catalog) {
-            textView.text = catalogItem.text
-//            imageView.setImageResource(catalogItem.img)
+    inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val title = itemView.findViewById<TextView>(R.id.textView9)
+        private val img = itemView.findViewById<ImageView>(R.id.imageViewCatalogItem)
+        private val likeButton = itemView.findViewById<ImageButton>(R.id.favoriteButton)
+
+        fun bind(recipe: Recipe) {
+            title.text = recipe.title
+            Glide.with(img.context)
+                .load(recipe.imageUrl)
+                .placeholder(R.drawable.logo)
+                .into(img)
+            likeButton.setImageResource(
+                if (recipe.isFavorite) R.drawable.catalog else R.drawable.home
+            )
+
+            itemView.setOnClickListener { onItemClick(recipe) }
+
+            likeButton.setOnClickListener {
+                onFavoriteClick(recipe)
+                likeButton.setImageResource(
+                    if (!recipe.isFavorite) R.drawable.catalog else R.drawable.home
+                )
+            }
         }
     }
 }

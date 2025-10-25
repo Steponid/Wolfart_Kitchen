@@ -43,7 +43,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorit"
-        android:layout_width="0dp"
+        android:layout_width="330dp"
         android:layout_height="0dp"
         android:layout_marginTop="65dp"
         app:layout_constraintBottom_toBottomOf="parent"
