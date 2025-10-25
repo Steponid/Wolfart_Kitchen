@@ -24,7 +24,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/accent2"
         app:itemActiveIndicatorStyle="@color/white"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/select_button_nav"
