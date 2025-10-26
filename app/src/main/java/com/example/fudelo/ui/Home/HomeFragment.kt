@@ -180,38 +180,46 @@ class HomeFragment : Fragment() {
             videoUrl = "https://vk.com/video-161645474_456239337"
         ),
         Recipe(
-            "4",
-            "",
-            "Смузи",
-            "Полезный фруктовый напиток",
-            "https://i.imgur.com/4.jpg",
-            difficulty = 1,
-            timeMinutes = 5,
+            "3",
+            "complex",
+            "Айнтопф",
+            "Блюдо представляет собой не что иное как густой суп чисто крестьянского происхождения, служащий полной трапезой.",
+            "https://avatars.dzeninfra.ru/get-zen_doc/4721351/pub_61ba29c01a2fc9518da47c71_61bc6e2bc0fc4651c7b5e91c/scale_1200",
+            difficulty = 5,
+            timeMinutes = 180,
             ingredients = listOf(
-                Ingredient("Банан", "1 шт"),
-                Ingredient("Молоко", "200 мл")
+                Ingredient("Охотничьи колбаски", "200 г"),
+                Ingredient("Салями", "200 г"),
+                Ingredient("Венские сардельки", "500 г"),
+                Ingredient("Большая луковица", "1 шт."),
+                Ingredient("Томатная паста", "1 ч.л"),
+                Ingredient("Квашенная капуста", "500 г"),
             ),
             steps = listOf(
-                IntStep(1, RecipeStep("Положить ингредиенты в блендер", isTitlePage = true)),
-                IntStep(2, RecipeStep("Взбить до однородной массы", isLastPage = true))
-            )
+                IntStep(1, RecipeStep(
+                    text = "Замешиваем тесто: смешиваем муку и холодное масло до крошки. Добавляем воду и вымешиваем до гладкости. Тесто должно быть эластичным, не липнуть к рукам.",
+                    imageUrl = "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13",
+                    isTitlePage = true
+                )),
+                IntStep(2, RecipeStep(
+                    text = "Делим тесто на 10 равных частей, раскатываем каждый пласт очень тонко. Коржи должны быть максимально тонкие, иначе торт получится тяжёлым.",
+                    imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Napoleon_step2.jpg/800px-Napoleon_step2.jpg"
+                )),
+                IntStep(3, RecipeStep(
+                    text = "Выпекаем каждый корж при 200°C до золотистого цвета. Остужаем на решётке.",
+                    imageUrl = "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13"
+                )),
+                IntStep(4, RecipeStep(
+                    text = "Готовим крем: молоко нагреваем, смешиваем с яйцами, сахаром и ванилью, доводим до густоты, постоянно помешивая."
+                )),
+                IntStep(5, RecipeStep(
+                    text = "Собираем торт, промазывая каждый корж кремом, покрываем верхушку и бока. Ставим в холодильник минимум на 4 часа.",
+                    imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Napoleon_step5.jpg/800px-Napoleon_step5.jpg",
+                    isLastPage = true
+                ))
+            ),
+            videoUrl = "https://vk.com/video-161645474_456239337"
         ),
-        Recipe(
-            "5",
-            "",
-            "Тост с авокадо",
-            "Быстрый и вкусный завтрак",
-            "https://i.imgur.com/5.jpg",
-            difficulty = 1,
-            timeMinutes = 7,
-            ingredients = listOf(
-                Ingredient("Хлеб", "2 ломтика"),
-                Ingredient("Авокадо", "1 шт")
-            ),
-            steps = listOf(
-                IntStep(1, RecipeStep("Поджарить хлеб", isTitlePage = true)),
-                IntStep(2, RecipeStep("Намазать авокадо", isLastPage = true))
-            )
-        )
+
     )
 }
