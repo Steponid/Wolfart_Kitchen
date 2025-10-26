@@ -137,50 +137,8 @@ class HomeFragment : Fragment() {
 
     // Примеры рецептов  для теста
     private fun sampleData() = listOf(
-        // Рецепт 2
         Recipe(
             "2",
-            "complex",
-            "Торт Наполеон с заварным кремом",
-            "Классический Наполеон с множеством слоёв и тонким тестом.",
-            "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13",
-            difficulty = 5,
-            timeMinutes = 180,
-            ingredients = listOf(
-                Ingredient("Мука", "500 г"),
-                Ingredient("Масло сливочное", "250 г"),
-                Ingredient("Молоко", "1 л"),
-                Ingredient("Сахар", "200 г"),
-                Ingredient("Яйца", "5 шт"),
-                Ingredient("Ванильный сахар", "1 ч.л.")
-            ),
-            steps = listOf(
-                IntStep(1, RecipeStep(
-                    text = "Замешиваем тесто: смешиваем муку и холодное масло до крошки. Добавляем воду и вымешиваем до гладкости. Тесто должно быть эластичным, не липнуть к рукам.",
-                    imageUrl = "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13",
-                    isTitlePage = true
-                )),
-                IntStep(2, RecipeStep(
-                    text = "Делим тесто на 10 равных частей, раскатываем каждый пласт очень тонко. Коржи должны быть максимально тонкие, иначе торт получится тяжёлым.",
-                    imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Napoleon_step2.jpg/800px-Napoleon_step2.jpg"
-                )),
-                IntStep(3, RecipeStep(
-                    text = "Выпекаем каждый корж при 200°C до золотистого цвета. Остужаем на решётке.",
-                    imageUrl = "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13"
-                )),
-                IntStep(4, RecipeStep(
-                    text = "Готовим крем: молоко нагреваем, смешиваем с яйцами, сахаром и ванилью, доводим до густоты, постоянно помешивая."
-                )),
-                IntStep(5, RecipeStep(
-                    text = "Собираем торт, промазывая каждый корж кремом, покрываем верхушку и бока. Ставим в холодильник минимум на 4 часа.",
-                    imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Napoleon_step5.jpg/800px-Napoleon_step5.jpg",
-                    isLastPage = true
-                ))
-            ),
-            videoUrl = "https://vk.com/video-161645474_456239337"
-        ),
-        Recipe(
-            "3",
             "complex",
             "Айнтопф",
             "Блюдо представляет собой не что иное как густой суп чисто крестьянского происхождения, служащий полной трапезой.",
@@ -194,6 +152,8 @@ class HomeFragment : Fragment() {
                 Ingredient("Большая луковица", "1 шт."),
                 Ingredient("Томатная паста", "1 ч.л"),
                 Ingredient("Квашенная капуста", "500 г"),
+                Ingredient("Зелень свежая", "1 шт."),
+                Ingredient("Картофель", "2 шт."),
             ),
             steps = listOf(
                 IntStep(1, RecipeStep(
