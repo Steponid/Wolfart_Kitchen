@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/currentStep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/textAccent"
+        android:text="Шаг: 1"
+        android:textSize="22sp"
+        android:padding="16dp"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerRecipe"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="12dp"
+        android:weightSum="4">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/backStepBtn"
+            style="@style/buttonTitle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Назад"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nextStepBtn"
+            style="@style/buttonTitle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:text="Далее"/>
+
+        <ImageView
+            android:id="@+id/favorite"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:src="@drawable/like"
+            android:contentDescription="Favorite"/>
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:contentDescription="Close"/>
+    </LinearLayout>
+</LinearLayout>

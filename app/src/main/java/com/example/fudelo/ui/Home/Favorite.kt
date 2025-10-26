@@ -43,9 +43,10 @@ class FavoriteAdapter(
     override fun getItemCount() = filteredFavorites.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val title: TextView = view.findViewById(R.id.textView9)
-        private val image: ImageView = view.findViewById(R.id.imageViewCatalogItem)
-        private val likeButton: ImageButton = view.findViewById(R.id.favoriteButton)
+        private val title = view.findViewById<TextView>(R.id.textView9)
+        private val image = view.findViewById<ImageView>(R.id.imageViewCatalogItem)
+        private val likeButton = view.findViewById<ImageView>(R.id.favoriteButton)
+        private val OpenButton = view.findViewById<ImageView>(R.id.OpenButton)
 
         fun bind(recipe: Recipe) {
             title.text = recipe.title
@@ -55,10 +56,10 @@ class FavoriteAdapter(
                 .into(image)
 
             likeButton.setImageResource(
-                if (recipe.isFavorite) R.drawable.catalog else R.drawable.home
+                if (recipe.isFavorite) R.drawable.like_action else R.drawable.like
             )
 
-            itemView.setOnClickListener { onRecipeClick(recipe) }
+            OpenButton.setOnClickListener { onRecipeClick(recipe) }
 
             likeButton.setOnClickListener {
                 onFavoriteClick(recipe)

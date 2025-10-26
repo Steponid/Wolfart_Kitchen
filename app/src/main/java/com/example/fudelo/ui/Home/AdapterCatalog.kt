@@ -34,7 +34,8 @@ class AdapterCatalog(
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title = itemView.findViewById<TextView>(R.id.textView9)
         private val img = itemView.findViewById<ImageView>(R.id.imageViewCatalogItem)
-        private val likeButton = itemView.findViewById<ImageButton>(R.id.favoriteButton)
+        private val likeButton = itemView.findViewById<ImageView>(R.id.favoriteButton)
+        private val OpenButton = itemView.findViewById<ImageView>(R.id.OpenButton)
 
         fun bind(recipe: Recipe) {
             title.text = recipe.title
@@ -43,15 +44,15 @@ class AdapterCatalog(
                 .placeholder(R.drawable.logo)
                 .into(img)
             likeButton.setImageResource(
-                if (recipe.isFavorite) R.drawable.catalog else R.drawable.home
+                if (recipe.isFavorite) R.drawable.like_action else R.drawable.like
             )
 
-            itemView.setOnClickListener { onItemClick(recipe) }
+            OpenButton.setOnClickListener { onItemClick(recipe) }
 
             likeButton.setOnClickListener {
                 onFavoriteClick(recipe)
                 likeButton.setImageResource(
-                    if (!recipe.isFavorite) R.drawable.catalog else R.drawable.home
+                    if (!recipe.isFavorite) R.drawable.like_action else R.drawable.like
                 )
             }
         }

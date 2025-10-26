@@ -1,6 +1,7 @@
 package com.example.fudelo.ui.Home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,9 @@ import com.example.fudelo.R
 import com.example.fudelo.ui.Recipe
 import com.example.fudelo.ui.RecipeStep
 import androidx.core.content.edit
+import com.example.fudelo.ui.Ingredient
+import com.example.fudelo.ui.IntStep
+import com.example.fudelo.ui.page.Page
 
 class HomeFragment : Fragment() {
 
@@ -35,6 +39,15 @@ class HomeFragment : Fragment() {
         CategoryItem("vegetables", "Овощные"),
         CategoryItem("dessert", "Десерты")
     )
+
+    override fun onResume() {
+        super.onResume()
+        val prefs = requireContext().getSharedPreferences("fudelo_prefs", 0)
+        val favoriteIds = prefs.getStringSet("favorite_recipes", emptySet()) ?: emptySet()
+        recipesList.replaceAll { it.copy(isFavorite = favoriteIds.contains(it.id)) }
+        catalogAdapter.notifyDataSetChanged()
+        favoritesAdapter.setFavorites(recipesList.filter { it.isFavorite })
+    }
 
     // Создаём вью
     override fun onCreateView(
@@ -117,43 +130,87 @@ class HomeFragment : Fragment() {
 
     // Открытие рецепта (мб сделаю)
     private fun openRecipe(recipe: Recipe) {
-        // TODO: сделать открытие рецепта
+        val intent = Intent(requireContext(), Page::class.java)
+        intent.putExtra("recipe", recipe)
+        startActivity(intent)
     }
 
     // Примеры рецептов  для теста
     private fun sampleData() = listOf(
-        Recipe(
-            "1",
-            "meat",
-            "Пицца",
-            "Вкусная пицца",
-            "https://i.ytimg.com/vi/agbT44M6rnE/maxresdefault.jpg",
-            mapOf(
-                1 to RecipeStep("Замеси тесто", null, isTitlePage = true),
-                2 to RecipeStep("Добавь начинку"),
-                3 to RecipeStep("Запеки", null, isLastPage = true)
-            )
-        ),
+        // Рецепт 2
         Recipe(
             "2",
-            "vegetables",
-            "Салат",
-            "Лёгкий салат",
-            "https://avatars.mds.yandex.net/i?id=b79d33ce6a79ba40ec7fdb5ef42c1056e55f0486-4078273-images-thumbs&n=13",
-            mapOf(
-                1 to RecipeStep("Порежь овощи", null, isTitlePage = true),
-                2 to RecipeStep("Перемешай", null, isLastPage = true)
+            "complex",
+            "Торт Наполеон с заварным кремом",
+            "Классический Наполеон с множеством слоёв и тонким тестом.",
+            "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13",
+            difficulty = 5,
+            timeMinutes = 180,
+            ingredients = listOf(
+                Ingredient("Мука", "500 г"),
+                Ingredient("Масло сливочное", "250 г"),
+                Ingredient("Молоко", "1 л"),
+                Ingredient("Сахар", "200 г"),
+                Ingredient("Яйца", "5 шт"),
+                Ingredient("Ванильный сахар", "1 ч.л.")
+            ),
+            steps = listOf(
+                IntStep(1, RecipeStep(
+                    text = "Замешиваем тесто: смешиваем муку и холодное масло до крошки. Добавляем воду и вымешиваем до гладкости. Тесто должно быть эластичным, не липнуть к рукам.",
+                    imageUrl = "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13",
+                    isTitlePage = true
+                )),
+                IntStep(2, RecipeStep(
+                    text = "Делим тесто на 10 равных частей, раскатываем каждый пласт очень тонко. Коржи должны быть максимально тонкие, иначе торт получится тяжёлым.",
+                    imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Napoleon_step2.jpg/800px-Napoleon_step2.jpg"
+                )),
+                IntStep(3, RecipeStep(
+                    text = "Выпекаем каждый корж при 200°C до золотистого цвета. Остужаем на решётке.",
+                    imageUrl = "https://avatars.mds.yandex.net/i?id=948bb467858d755bd8f221466051f2aaceaa6d6e-12537594-images-thumbs&n=13"
+                )),
+                IntStep(4, RecipeStep(
+                    text = "Готовим крем: молоко нагреваем, смешиваем с яйцами, сахаром и ванилью, доводим до густоты, постоянно помешивая."
+                )),
+                IntStep(5, RecipeStep(
+                    text = "Собираем торт, промазывая каждый корж кремом, покрываем верхушку и бока. Ставим в холодильник минимум на 4 часа.",
+                    imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Napoleon_step5.jpg/800px-Napoleon_step5.jpg",
+                    isLastPage = true
+                ))
+            ),
+            videoUrl = "https://vk.com/video-161645474_456239337"
+        ),
+        Recipe(
+            "4",
+            "",
+            "Смузи",
+            "Полезный фруктовый напиток",
+            "https://i.imgur.com/4.jpg",
+            difficulty = 1,
+            timeMinutes = 5,
+            ingredients = listOf(
+                Ingredient("Банан", "1 шт"),
+                Ingredient("Молоко", "200 мл")
+            ),
+            steps = listOf(
+                IntStep(1, RecipeStep("Положить ингредиенты в блендер", isTitlePage = true)),
+                IntStep(2, RecipeStep("Взбить до однородной массы", isLastPage = true))
             )
         ),
         Recipe(
-            "3",
-            "dessert",
-            "Торт",
-            "Шоколадный торт",
-            null,
-            mapOf(
-                1 to RecipeStep("Смешай ингредиенты", null, isTitlePage = true),
-                2 to RecipeStep("Выпеки", null, isLastPage = true)
+            "5",
+            "",
+            "Тост с авокадо",
+            "Быстрый и вкусный завтрак",
+            "https://i.imgur.com/5.jpg",
+            difficulty = 1,
+            timeMinutes = 7,
+            ingredients = listOf(
+                Ingredient("Хлеб", "2 ломтика"),
+                Ingredient("Авокадо", "1 шт")
+            ),
+            steps = listOf(
+                IntStep(1, RecipeStep("Поджарить хлеб", isTitlePage = true)),
+                IntStep(2, RecipeStep("Намазать авокадо", isLastPage = true))
             )
         )
     )
