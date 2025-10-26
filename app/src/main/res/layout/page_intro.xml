@@ -21,6 +21,7 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/textAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -30,6 +31,7 @@
 
         <TextView
             android:id="@+id/desc"
+            style="@style/textAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -46,6 +48,7 @@
 
             <TextView
                 android:id="@+id/time"
+                style="@style/textAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -54,6 +57,7 @@
 
             <TextView
                 android:id="@+id/difficulty"
+                style="@style/textAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Сложность"
@@ -65,7 +69,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ingredientsText"
+                style="@style/textAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textSize="16sp"
+                android:text="Ингредиенты:" />
+
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
 </ScrollView>
