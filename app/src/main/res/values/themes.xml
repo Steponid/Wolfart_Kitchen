@@ -11,6 +11,13 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="Search">
+        <item name="android:editTextColor">@color/accent</item>
+        <item name="android:textColorHint">@color/noaccent</item>
+        <item name="android:searchHintIcon">@color/accent</item>
+    </style>
+
+
     <style name="textnoAccent">
         <item name="android:textColor">@color/noaccent</item>
         <item name="android:textSize">20sp</item>

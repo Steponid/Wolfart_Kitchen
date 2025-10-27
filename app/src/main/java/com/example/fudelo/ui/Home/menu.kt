@@ -1,6 +1,5 @@
 package com.example.fudelo.ui.Home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fudelo.R
 
 data class CategoryItem(
-    val idType: String, // ID категории для фильтрации (например "meat")
-    val text: String    // Название категории (например "Мясные")
+    val idType: String,
+    val text: String
 )
 
 class CategoryAdapter(

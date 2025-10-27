@@ -27,4 +27,24 @@
         android:text="Закрыть"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        style="@style/textAccent"
+        android:textAllCaps="false"
+        android:layout_marginTop="30dp"
+        android:text="Какова ваша оценка?"
+        android:textAlignment="center" />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:numStars="5"
+        android:progressTint="#CE1010"
+        android:stepSize="0.5" />
 </LinearLayout>

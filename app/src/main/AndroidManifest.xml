@@ -18,6 +18,7 @@
             android:exported="false" />
         <activity
             android:name=".ButNav"
+            android:windowSoftInputMode="stateHidden"
             android:exported="false" />
         <activity
             android:name=".Reg"

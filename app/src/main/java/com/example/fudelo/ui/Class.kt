@@ -34,6 +34,4 @@ data class Ingredient(
 data class RecipeStep(
     val text: String,
     val imageUrl: String? = null,
-    val isTitlePage: Boolean = false,
-    val isLastPage: Boolean = false
 ) : Parcelable
