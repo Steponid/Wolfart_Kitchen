@@ -4,6 +4,20 @@ import com.example.fudelo.ui.Ingredient
 import com.example.fudelo.ui.IntStep
 import com.example.fudelo.ui.Recipe
 import com.example.fudelo.ui.RecipeStep
+
+fun parseSavedRecipe(str: String, nextId: Int): Recipe {
+    val parts = str.split("|")
+    val name = parts.getOrNull(0) ?: ""
+    val type = parts.getOrNull(1) ?: ""
+    val desc = parts.getOrNull(2) ?: ""
+    val cal = parts.getOrNull(3) ?: ""
+    val img = parts.getOrNull(4) ?: ""
+    val ingredients = parts.getOrNull(5)?.split(";")?.map { Ingredient(it, "") } ?: emptyList()
+    val steps = parts.getOrNull(6)?.split(";")?.mapIndexed { i, s ->
+        IntStep(i+1, RecipeStep(s,""))
+    } ?: emptyList()
+    return Recipe(nextId.toString(), type, name, desc, img, 0, 0, ingredients, steps)
+}
 fun sampleData() = listOf(
     Recipe(
         "0",
@@ -113,7 +127,7 @@ fun sampleData() = listOf(
         "3",
         "pervoe",
         "Суп с квашеной капустой и курицей",
-        "Сегодня у меня вкуснейший суп на обед, с квашеной капустой, на курице. Я купила куриное филе, чтобы супчик получился не очень жирным, но его можно заменить на куриную ножку или другой кусочек курицы.",
+        "",
         "https://img.povar.ru/main/58/b6/e4/ec/sup_s_kvashenoi_kapustoi_i_kuricei-405095.JPG",
         difficulty = 3,
         timeMinutes = 80,

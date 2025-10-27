@@ -18,6 +18,36 @@ class AdapterCatalog(
     private val onFavoriteClick: (Recipe) -> Unit,
     private val context: Context
 ) : RecyclerView.Adapter<AdapterCatalog.RecipeViewHolder>() {
+    private var all: List<Recipe> = recipes
+    private var displayed: List<Recipe> = recipes
+
+    fun updateRecipe(id: String, updatedRecipe: Recipe) {
+        val index = displayed.indexOfFirst { it.id == id }
+        if (index != -1) {
+            displayed = displayed.toMutableList().apply { set(index, updatedRecipe) }
+            notifyItemChanged(index)
+        }
+    }
+
+    fun filterSearch(query: String) {
+        displayed = if (query.isEmpty()) {
+            all
+        } else {
+            all.filter {
+                it.title.contains(query, ignoreCase = true)
+            }
+        }
+        notifyDataSetChanged()
+    }
+
+    fun applyFilter(categoryId: String?) {
+        displayed = if (categoryId.isNullOrEmpty()) {
+            all
+        } else {
+            all.filter { it.idType == categoryId }
+        }
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -26,11 +56,11 @@ class AdapterCatalog(
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val recipe = recipes[position]
+        val recipe = displayed[position]
         holder.bind(recipe)
     }
 
-    override fun getItemCount(): Int = recipes.size
+    override fun getItemCount(): Int = displayed.size
 
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title = itemView.findViewById<TextView>(R.id.textView9)

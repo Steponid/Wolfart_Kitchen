@@ -1,0 +1,145 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/textAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Название блюда"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/nameInput"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Гороховый суп"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            style="@style/textAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Тип блюда"
+            android:textAlignment="center"
+            android:layout_marginTop="14dp"/>
+        <EditText
+            android:id="@+id/typeInput"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Первое"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            style="@style/textAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Описание"
+            android:textAlignment="center"
+            android:layout_marginTop="14dp"/>
+        <EditText
+            android:id="@+id/descInput"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Простой гороховый суп"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            style="@style/textAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Калорийность"
+            android:textAlignment="center"
+            android:layout_marginTop="14dp"/>
+        <EditText
+            android:id="@+id/calInput"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="350 ккал"
+            android:layout_marginTop="6dp"/>
+
+        <TextView
+            style="@style/textAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="URL изображения"
+            android:textAlignment="center"
+            android:layout_marginTop="14dp"/>
+        <EditText
+            android:id="@+id/imgInput"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="https://img.povar.ru/uploads/34/e2/e0/15/gorohovii_sup_po-nemecki-706776.JPG"
+            android:layout_marginTop="6dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/noaccent"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            style="@style/textAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ингредиенты"
+            android:textAlignment="center"/>
+        <LinearLayout
+            android:id="@+id/ingredientsContainer"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+            <EditText style="@style/EditText" android:layout_width="match_parent" android:layout_height="48dp" android:hint="Горох - 300г" android:layout_marginTop="4dp"/>
+            <EditText style="@style/EditText" android:layout_width="match_parent" android:layout_height="48dp" android:hint="Вода - 2л" android:layout_marginTop="4dp"/>
+            <EditText style="@style/EditText" android:layout_width="match_parent" android:layout_height="48dp" android:hint="Бекон - 150г" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/noaccent"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            style="@style/textAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Шаги приготовления"
+            android:textAlignment="center"/>
+        <LinearLayout
+            android:id="@+id/stepsContainer"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+            <EditText style="@style/EditText" android:layout_width="match_parent" android:layout_height="48dp" android:hint="Замочить горох на несколько часов" android:layout_marginTop="4dp"/>
+            <EditText style="@style/EditText" android:layout_width="match_parent" android:layout_height="48dp" android:hint="Варить горох в воде до готовности" android:layout_marginTop="4dp"/>
+            <EditText style="@style/EditText" android:layout_width="match_parent" android:layout_height="48dp" android:hint="Обжарить овощи с беконом" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveBtn"
+            style="@style/buttonTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сохранить рецепт"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+</ScrollView>

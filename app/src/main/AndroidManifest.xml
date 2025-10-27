@@ -14,12 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/theme.Fudelo">
         <activity
+            android:name=".ui.Add"
+            android:exported="false" />
+        <activity
             android:name=".ui.page.Page"
             android:exported="false" />
         <activity
             android:name=".ButNav"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Reg"
             android:exported="false" />

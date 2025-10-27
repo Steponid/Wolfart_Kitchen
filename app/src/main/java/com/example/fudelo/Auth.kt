@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +21,7 @@ class Auth : AppCompatActivity() {
     private lateinit var pass: EditText
     private lateinit var ViewGoToReg: View
 
+    private lateinit var emailReg: EditText
     private lateinit var buttonReg: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,7 @@ class Auth : AppCompatActivity() {
         pass = findViewById(R.id.passwordReg)
         ViewGoToReg = findViewById(R.id.ViewGoAuth)
         buttonReg = findViewById(R.id.buttonReg)
+        emailReg = findViewById(R.id.emailReg)
 
         //логика смены видемости пароля
         passSel.setOnClickListener {
@@ -54,8 +57,18 @@ class Auth : AppCompatActivity() {
         }
 
         buttonReg.setOnClickListener {
+
             startActivity(Intent(this@Auth, ButNav::class.java))
             finish()
+//            if (pass.text.toString() == "WSR" || emailReg.text.toString() == "WSR"){
+//                startActivity(Intent(this@Auth, ButNav::class.java))
+//                finish()
+//            }
+//            else{
+//                Toast.makeText(baseContext, "неправельный логин или пароль", Toast.LENGTH_SHORT).show()
+//            }
+
+
         }
 
         ViewGoToReg.setOnClickListener {

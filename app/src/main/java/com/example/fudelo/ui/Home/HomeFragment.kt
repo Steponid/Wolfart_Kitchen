@@ -1,5 +1,6 @@
 package com.example.fudelo.ui.Home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.example.fudelo.R
 import com.example.fudelo.ui.Recipe
 import com.example.fudelo.ui.RecipeStep
 import androidx.core.content.edit
+import com.example.fudelo.parseSavedRecipe
 import com.example.fudelo.sampleData
 import com.example.fudelo.ui.Ingredient
 import com.example.fudelo.ui.IntStep
@@ -45,6 +47,16 @@ class HomeFragment : Fragment() {
         //грузим данные из getSharedPreferences(fudelo_prefs) с значением теста (favorite_recipes)
         val prefs = requireContext().getSharedPreferences("fudelo_prefs", 0)
         val favoriteIds = prefs.getStringSet("favorite_recipes", null) ?: emptySet()
+
+        val prefs2 = requireContext().getSharedPreferences("my_recipes", Context.MODE_PRIVATE)
+        val savedSet = prefs2.getStringSet("recipes", emptySet()) ?: emptySet()
+
+        val startId = allRecipesList.size + 1
+        var nextId = startId
+        savedSet.forEach {
+            allRecipesList.add(parseSavedRecipe(it, nextId))
+            nextId++
+        }
 
         allRecipesList.clear()
         allRecipesList.addAll(sampleData().map { it.copy(isFavorite = favoriteIds.contains(it.id)) })

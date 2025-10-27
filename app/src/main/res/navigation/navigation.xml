@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/catalog"
-        android:name="com.example.fudelo.ui.CatalogFragment"
+        android:name="com.example.fudelo.ui.catalog.CatalogFragment"
         android:label="@string/catalog"
         tools:layout="@layout/fragment_catalog"/>
 

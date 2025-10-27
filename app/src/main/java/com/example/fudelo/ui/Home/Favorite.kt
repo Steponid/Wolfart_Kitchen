@@ -14,24 +14,28 @@ import com.example.fudelo.ui.Recipe
 import com.example.fudelo.ui.page.Page
 
 class FavoriteAdapter(
-    private var favoritesList: List<Recipe>,
+    private var favorites: List<Recipe>,
     private val onFavoriteClick: (Recipe) -> Unit,
     private val context: Context
 ) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
+    private var allFavorites: List<Recipe> = favorites
+    private var displayedFavorites: List<Recipe> = favorites
+
     // обновление
     fun updateFavorites(newFavorites: List<Recipe>) {
-        favoritesList = newFavorites
+        allFavorites = newFavorites
+        displayedFavorites = newFavorites
         notifyDataSetChanged()
     }
     // фильтр
     fun applyFilter(categoryId: String?) {
-        val filtered = if (categoryId.isNullOrEmpty()) {
-            favoritesList
+        displayedFavorites = if (categoryId.isNullOrEmpty()) {
+            allFavorites
         } else {
-            favoritesList.filter { it.idType == categoryId }
+            allFavorites.filter { it.idType == categoryId }
         }
-        updateFavorites(filtered)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,10 +45,10 @@ class FavoriteAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(favoritesList[position])
+        holder.bind(displayedFavorites[position])
     }
 
-    override fun getItemCount(): Int = favoritesList.size
+    override fun getItemCount(): Int = displayedFavorites.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val title = view.findViewById<TextView>(R.id.textView9)
