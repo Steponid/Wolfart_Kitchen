@@ -28,7 +28,11 @@ class FirstFragment : Fragment() {
         findViewById<TextView>(R.id.time).text = "${recipe.timeMinutes} мин"
         findViewById<TextView>(R.id.difficulty).text = "Сложность: ${"★".repeat(recipe.difficulty)}"
 
-        Glide.with(this).load(recipe.imageUrl).into(findViewById(R.id.image))
+        Glide
+            .with(this)
+            .load(recipe.imageUrl)
+            .into(findViewById(R.id.image))
+
 
         // Добавляем список ингредиентов
         val ingredientsText = findViewById<TextView>(R.id.ingredientsText)

@@ -46,12 +46,12 @@
         android:layout_width="330dp"
         android:layout_height="0dp"
         android:layout_marginTop="65dp"
-        tools:listitem="@layout/adapter_catalog_rec"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/adapter_catalog_rec" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/menu"
