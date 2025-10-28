@@ -58,15 +58,15 @@ class Auth : AppCompatActivity() {
 
         buttonReg.setOnClickListener {
 
-            startActivity(Intent(this@Auth, ButNav::class.java))
-            finish()
-//            if (pass.text.toString() == "WSR" || emailReg.text.toString() == "WSR"){
-//                startActivity(Intent(this@Auth, ButNav::class.java))
-//                finish()
-//            }
-//            else{
-//                Toast.makeText(baseContext, "неправельный логин или пароль", Toast.LENGTH_SHORT).show()
-//            }
+
+            if (pass.text.toString() == "WSR" )
+                if (emailReg.text.toString() == "WSR"){
+                    startActivity(Intent(this@Auth, ButNav::class.java))
+                    finish()
+            }
+            else{
+                Toast.makeText(baseContext, "неправельный логин или пароль", Toast.LENGTH_SHORT).show()
+            }
 
 
         }
