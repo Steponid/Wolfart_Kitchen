@@ -2,6 +2,7 @@ package com.example.fudelo.ui.Home
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fudelo.R
 import com.example.fudelo.ui.Recipe
-import com.example.fudelo.ui.RecipeStep
 import androidx.core.content.edit
 import com.example.fudelo.parseSavedRecipe
 import com.example.fudelo.sampleData
@@ -44,27 +44,38 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //грузим данные из getSharedPreferences(fudelo_prefs) с значением теста (favorite_recipes)
+        // Загружаем данные
+        loadData()
+    }
+
+    private fun loadData() {
         val prefs = requireContext().getSharedPreferences("fudelo_prefs", 0)
         val favoriteIds = prefs.getStringSet("favorite_recipes", null) ?: emptySet()
 
         val prefs2 = requireContext().getSharedPreferences("my_recipes", Context.MODE_PRIVATE)
         val savedSet = prefs2.getStringSet("recipes", emptySet()) ?: emptySet()
 
-        val startId = allRecipesList.size + 1
-        var nextId = startId
-        savedSet.forEach {
-            allRecipesList.add(parseSavedRecipe(it, nextId))
-            nextId++
-        }
-
+        // Очищаем и перезаполняем список
         allRecipesList.clear()
+
+        // Добавляем образцы данных
         allRecipesList.addAll(sampleData().map { it.copy(isFavorite = favoriteIds.contains(it.id)) })
+
+        // Добавляем пользовательские рецепты
+        var nextId = allRecipesList.size + 1
+        savedSet.forEach {
+            val recipe = parseSavedRecipe(it, nextId)
+            // Проверяем на дубликаты по ID
+            if (allRecipesList.none { existing -> existing.id == recipe.id }) {
+                allRecipesList.add(recipe.copy(isFavorite = favoriteIds.contains(recipe.id)))
+                nextId++
+            }
+        }
 
         // Инициализация адаптеров
         catalogAdapter = AdapterCatalog(
             allRecipesList,
-            {recipe -> toggleFavorite(recipe, prefs) },
+            { recipe -> toggleFavorite(recipe, prefs) },
             requireContext()
         )
 
@@ -80,7 +91,7 @@ class HomeFragment : Fragment() {
             categoryAdapter.selectCategoryById(categoryItem.idType)
         }
 
-        // Настройка ресайлер
+        // Настройка ресайклеров
         catalogRecyclerView.apply {
             adapter = catalogAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -99,11 +110,11 @@ class HomeFragment : Fragment() {
         categoryAdapter.selectCategoryById("")
     }
 
-    private fun toggleFavorite(recipe: Recipe, prefs: android.content.SharedPreferences) {
+    private fun toggleFavorite(recipe: Recipe, prefs: SharedPreferences) {
         val index = allRecipesList.indexOfFirst { it.id == recipe.id }
         if (index != -1) {
-            val currentFavoriteState = allRecipesList[index].isFavorite
-            val updatedRecipe = allRecipesList[index].copy(isFavorite = !currentFavoriteState)
+            // Переключаем состояние избранного
+            val updatedRecipe = allRecipesList[index].copy(isFavorite = !allRecipesList[index].isFavorite)
             allRecipesList[index] = updatedRecipe
 
             // Уведомляем адаптеры
@@ -118,7 +129,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    // Данные для менбю
+    override fun onResume() {
+        super.onResume()
+        loadData()
+    }
+
+    // Данные для меню
     private val categories = listOf(
         CategoryItem("", "Все"),
         CategoryItem("pervoe", "Первое"),

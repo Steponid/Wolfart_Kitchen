@@ -5,46 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/finishText"
-        style="@style/textAccent"
-        android:text="Рецепт завершён!"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <WebView
-        android:id="@+id/videoView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/closeButton"
-        style="@style/buttonTitle"
-        android:text="Закрыть"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        style="@style/textAccent"
-        android:textAllCaps="false"
-        android:layout_marginTop="30dp"
-        android:text="Какова ваша оценка?"
-        android:textAlignment="center" />
+            <TextView
+                android:id="@+id/finishText"
+                style="@style/textAccent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Рецепт завершён!"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-    <androidx.appcompat.widget.AppCompatRatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:numStars="5"
-        android:progressTint="#CE1010"
-        android:stepSize="0.5" />
+            <WebView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                style="@style/textAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Какова ваша оценка?"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="30sp" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:progressTint="@color/accent"
+                android:stepSize="0.5" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/closeButton"
+                style="@style/buttonTitle"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Закрыть" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

@@ -58,36 +58,40 @@ class CatalogFragment : Fragment() {
             addRecept.setOnClickListener {
                 startActivity(Intent(requireContext(), Add::class.java))
             }
-
-
-
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadData()
+    }
 
+    private fun loadData() {
         val prefs = requireContext().getSharedPreferences("fudelo_prefs", 0)
-        //подгружаем данные
         val favoriteIds = prefs.getStringSet("favorite_recipes", null) ?: emptySet()
 
-
-        val pref2= requireContext().getSharedPreferences("my_recipes", Context.MODE_PRIVATE)
+        val pref2 = requireContext().getSharedPreferences("my_recipes", Context.MODE_PRIVATE)
         val savedSet = pref2.getStringSet("recipes", emptySet()) ?: emptySet()
 
-        val startId = allRecipesList.size + 1
-        var nextId = startId
-        savedSet.forEach {
-            allRecipesList.add(parseSavedRecipe(it, nextId))
-            nextId++
-        }
-
+        // Очищаем и перезаполняем список
         allRecipesList.clear()
+
+        // Добавляем образцы данных
         allRecipesList.addAll(sampleData().map { it.copy(isFavorite = favoriteIds.contains(it.id)) })
 
+        // Добавляем пользовательские рецепты
+        var nextId = allRecipesList.size + 1
+        savedSet.forEach {
+            val recipe = parseSavedRecipe(it, nextId)
+            // Проверяем на дубликаты по ID
+            if (allRecipesList.none { existing -> existing.id == recipe.id }) {
+                allRecipesList.add(recipe.copy(isFavorite = favoriteIds.contains(recipe.id)))
+                nextId++
+            }
+        }
 
         /**
-         * а эта меню
+         * настройка меню
          */
         categoryAdapter = CategoryAdapter(categories) { categoryItem ->
             val type = categoryItem.idType.takeIf { it.isNotEmpty() }
@@ -97,12 +101,11 @@ class CatalogFragment : Fragment() {
 
         catalogAdapter = AdapterCatalog(
             allRecipesList,
-            {recipe -> toggleFavorite(recipe, prefs) },
+            { recipe -> toggleFavorite(recipe, prefs) },
             requireContext()
         )
 
-
-        // Настройка ресайлер
+        // Настройка ресайклеров
         catalogRecyclerView.apply {
             adapter = catalogAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -112,26 +115,29 @@ class CatalogFragment : Fragment() {
             adapter = categoryAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
-        categoryAdapter.selectCategoryById("")
 
+        categoryAdapter.selectCategoryById("")
     }
 
     private fun toggleFavorite(recipe: Recipe, prefs: android.content.SharedPreferences) {
-        // обновляем и в allRecipesList, и в catalogAdapter
-        val indexAll = allRecipesList.indexOfFirst { it.id == recipe.id }
-        if (indexAll != -1) {
-            val updated = allRecipesList[indexAll].copy(isFavorite = !allRecipesList[indexAll].isFavorite)
-            allRecipesList[indexAll] = updated
-        }
+        val index = allRecipesList.indexOfFirst { it.id == recipe.id }
+        if (index != -1) {
+            val updatedRecipe = allRecipesList[index].copy(isFavorite = !allRecipesList[index].isFavorite)
+            allRecipesList[index] = updatedRecipe
 
-        catalogAdapter.updateRecipe(recipe.id, allRecipesList[indexAll])
+            catalogAdapter.updateRecipe(recipe.id, updatedRecipe)
 
-        prefs.edit {
-            val newFavorites = allRecipesList.filter { it.isFavorite }.map { it.id }.toSet()
-            putStringSet("favorite_recipes", newFavorites)
+            prefs.edit {
+                val newFavorites = allRecipesList.filter { it.isFavorite }.map { it.id }.toSet()
+                putStringSet("favorite_recipes", newFavorites)
+            }
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadData()
+    }
 
     private val categories = listOf(
         CategoryItem("", "Все"),

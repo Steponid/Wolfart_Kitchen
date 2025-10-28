@@ -1,6 +1,5 @@
 package com.example.fudelo.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -34,7 +33,7 @@ class Add : AppCompatActivity() {
 
         val saveBtn = findViewById<Button>(R.id.saveBtn)
 
-        val prefs = getSharedPreferences("my_recipes", Context.MODE_PRIVATE)
+        val prefs = getSharedPreferences("my_recipes", MODE_PRIVATE)
         var recipesSet = prefs.getStringSet("recipes", mutableSetOf())!!.toMutableSet()
 
         saveBtn.setOnClickListener {
@@ -43,6 +42,12 @@ class Add : AppCompatActivity() {
             val desc = descInput.text.toString()
             val cal = calInput.text.toString()
             val img = imgInput.text.toString()
+
+            val fullDescription = if (cal.isNotEmpty()) {
+                "$desc\n$cal"
+            } else {
+                desc
+            }
 
             val ingredients = mutableListOf<String>()
             for (i in 0 until ingredientsContainer.childCount) {
@@ -59,8 +64,7 @@ class Add : AppCompatActivity() {
             val recipeStr = listOf(
                 name,
                 type,
-                desc,
-                cal,
+                fullDescription,
                 img,
                 ingredients.joinToString(";"),
                 steps.joinToString(";")
