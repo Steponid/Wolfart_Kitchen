@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "71726931293",
+    "project_id": "fudelo-df7ac",
+    "storage_bucket": "fudelo-df7ac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71726931293:android:31c6603d34dd45e5301cb4",
+        "android_client_info": {
+          "package_name": "com.example.fudelo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADw_RPtnpe5zUUQjAiA1D80DuppGJTIgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

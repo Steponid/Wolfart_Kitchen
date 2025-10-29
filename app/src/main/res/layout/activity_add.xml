@@ -82,7 +82,7 @@
             style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="https://img.povar.ru/uploads/34/e2/e0/15/gorohovii_sup_po-nemecki-706776.JPG"
+            android:hint="https:"
             android:layout_marginTop="6dp"/>
 
         <View

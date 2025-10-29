@@ -8,22 +8,28 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class Load : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_load)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        //немного симуляция загрузки по нармальному грузить данные с БД нужно, но в данный момент базы нет
+
+        val currenUser = Firebase.auth.currentUser
+        if (currenUser != null){
+            startActivity(Intent(this@Load, Auth::class.java))
+            finish()
+        }
+
         object : CountDownTimer(2500, 100){
             override fun onFinish() {
-//                по окончанию таймера переходим на экран авторизации
-                Log.v("Load", "таймер завершился, переход на авторизацию")
                 startActivity(Intent(this@Load, Auth::class.java))
                 finish()
             }
@@ -32,6 +38,5 @@ class Load : AppCompatActivity() {
             }
 
         }.start()
-
     }
 }

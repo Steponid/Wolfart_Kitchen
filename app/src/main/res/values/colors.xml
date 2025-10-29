@@ -7,4 +7,5 @@
     <color name="accent2">#332d2d</color>
     <color name="back">#272323</color>
     <color name="back_recy">#4DFCE7A7</color>
+    <color name="error">#FD3535</color>
 </resources>
