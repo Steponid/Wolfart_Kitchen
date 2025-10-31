@@ -1,11 +1,13 @@
-package com.example.fudelo
+package com.example.fudelo.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.fudelo.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ButNav : AppCompatActivity() {
@@ -21,7 +23,7 @@ class ButNav : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as androidx.navigation.fragment.NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
         NavigationUI.setupWithNavController(navView, navController)

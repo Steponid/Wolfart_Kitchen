@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.fudelo.R
-import com.example.fudelo.ui.RecipeStep
+import com.example.fudelo.RecipeStep
 
 class StepFragment : Fragment() {
     private lateinit var step: RecipeStep

@@ -5,12 +5,11 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.viewpager2.widget.ViewPager2
 import com.example.fudelo.R
-import com.example.fudelo.ui.Recipe
+import com.example.fudelo.Recipe
 
 class Page : AppCompatActivity() {
 
@@ -68,7 +67,7 @@ class Page : AppCompatActivity() {
         favBtn.setOnClickListener {
             recipe.isFavorite = !recipe.isFavorite
             updateFavIcon(favBtn, recipe.isFavorite)
-            saveFavorite(recipe.id, recipe.isFavorite)
+            saveFavorite(recipe.id.toString(), recipe.isFavorite)
         }
     }
 

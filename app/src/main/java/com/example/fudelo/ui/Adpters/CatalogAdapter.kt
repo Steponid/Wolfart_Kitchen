@@ -1,4 +1,4 @@
-package com.example.fudelo.ui.Home
+package com.example.fudelo.ui.Adpters
 
 import android.content.Context
 import android.content.Intent
@@ -10,41 +10,47 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.fudelo.R
-import com.example.fudelo.ui.Recipe
+import com.example.fudelo.Recipe
 import com.example.fudelo.ui.page.Page
 
-class AdapterCatalog(
+class CatalogAdapter(
     private val recipes: List<Recipe>,
     private val onFavoriteClick: (Recipe) -> Unit,
     private val context: Context
-) : RecyclerView.Adapter<AdapterCatalog.RecipeViewHolder>() {
-    private var all: List<Recipe> = recipes
-    private var displayed: List<Recipe> = recipes
+) : RecyclerView.Adapter<CatalogAdapter.RecipeViewHolder>() {
 
-    fun updateRecipe(id: String, updatedRecipe: Recipe) {
-        val index = displayed.indexOfFirst { it.id == id }
+    private var allRecipes: List<Recipe> = recipes
+    private var displayedRecipes: List<Recipe> = recipes
+
+    fun updateData(newRecipes: List<Recipe>) {
+        allRecipes = newRecipes
+        displayedRecipes = newRecipes
+        notifyDataSetChanged()
+    }
+
+    fun updateRecipe(id: Int, updatedRecipe: Recipe) {
+        val index = displayedRecipes.indexOfFirst { it.id == id }
         if (index != -1) {
-            displayed = displayed.toMutableList().apply { set(index, updatedRecipe) }
+            val newList = displayedRecipes.toMutableList().apply { set(index, updatedRecipe) }
+            displayedRecipes = newList
             notifyItemChanged(index)
         }
     }
 
     fun filterSearch(query: String) {
-        displayed = if (query.isEmpty()) {
-            all
+        displayedRecipes = if (query.isEmpty()) {
+            allRecipes
         } else {
-            all.filter {
-                it.title.contains(query, ignoreCase = true)
-            }
+            allRecipes.filter { it.title.contains(query, ignoreCase = true) }
         }
         notifyDataSetChanged()
     }
 
     fun applyFilter(categoryId: String?) {
-        displayed = if (categoryId.isNullOrEmpty()) {
-            all
+        displayedRecipes = if (categoryId.isNullOrEmpty()) {
+            allRecipes
         } else {
-            all.filter { it.idType == categoryId }
+            allRecipes.filter { it.idType == categoryId }
         }
         notifyDataSetChanged()
     }
@@ -56,11 +62,11 @@ class AdapterCatalog(
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val recipe = displayed[position]
+        val recipe = displayedRecipes[position]
         holder.bind(recipe)
     }
 
-    override fun getItemCount(): Int = displayed.size
+    override fun getItemCount(): Int = displayedRecipes.size
 
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title = itemView.findViewById<TextView>(R.id.textView9)
@@ -80,11 +86,12 @@ class AdapterCatalog(
             )
 
             openButton.setOnClickListener {
-                // делаем переход
-                val intent = Intent(context, Page::class.java)
-                intent.putExtra("recipe", recipe)
+                val intent = Intent(context, Page::class.java).apply {
+                    putExtra("recipe", recipe)
+                }
                 context.startActivity(intent)
             }
+
             likeButton.setOnClickListener {
                 onFavoriteClick(recipe)
             }

@@ -17,8 +17,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import com.example.fudelo.ui.ButNav
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 
 class Reg : AppCompatActivity() {
     private lateinit var back: ImageView
@@ -127,13 +129,26 @@ class Reg : AppCompatActivity() {
             ProgressBar.visibility = View.VISIBLE
             if (Email.text.isNotEmpty() and Password.text.isNotEmpty() and PassworRep.text.isNotEmpty()){
                 if (Email.text.contains("@")){
-                    if (Password.text.length == 8){
+                    if (Password.text.length >= 8){
                         if (Password.text.toString() == PassworRep.text.toString()){
                             Firebase.auth.createUserWithEmailAndPassword(Email.text.toString(), Password.text.toString())
                                 .addOnSuccessListener {
-                                    Toast.makeText(baseContext, "Учетная запясь ${Email.text} создана", Toast.LENGTH_SHORT).show()
-                                    startActivity(Intent(this@Reg, ButNav::class.java))
-                                    finish()
+
+                                    val map = hashMapOf(
+                                        "email" to Email.text.toString()
+                                    )
+
+                                    Firebase.firestore.collection("User",).document(Email.text.toString())
+                                        .set(map)
+                                        .addOnSuccessListener {
+                                            Toast.makeText(baseContext, "Учетная запясь ${Email.text} создана", Toast.LENGTH_SHORT).show()
+                                            startActivity(Intent(this@Reg, ButNav::class.java))
+                                            finish()
+                                        }
+                                        .addOnFailureListener {
+                                            Toast.makeText(baseContext, "Ошибка", Toast.LENGTH_SHORT).show()
+
+                                        }
                                     ProgressBar.visibility = View.GONE
                                 }
                                 .addOnFailureListener {

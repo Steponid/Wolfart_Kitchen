@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.example.fudelo.ui.Home.HomeFragment"
+        android:name="com.example.fudelo.ui.FragmenMain.HomeFragment"
         android:label="@string/Home"
         tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/catalog"
-        android:name="com.example.fudelo.ui.catalog.CatalogFragment"
+        android:name="com.example.fudelo.ui.FragmenMain.CatalogFragment"
         android:label="@string/catalog"
         tools:layout="@layout/fragment_catalog"/>
 
     <fragment
         android:id="@+id/profile"
-        android:name="com.example.fudelo.ui.ProfleFragment"
+        android:name="com.example.fudelo.ui.FragmenMain.ProfleFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profle"/>
 </navigation>

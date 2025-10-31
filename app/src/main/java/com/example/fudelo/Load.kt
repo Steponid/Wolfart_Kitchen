@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.fudelo.ui.ButNav
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -24,8 +25,9 @@ class Load : AppCompatActivity() {
 
         val currenUser = Firebase.auth.currentUser
         if (currenUser != null){
-            startActivity(Intent(this@Load, Auth::class.java))
+            startActivity(Intent(this@Load, ButNav::class.java))
             finish()
+            return
         }
 
         object : CountDownTimer(2500, 100){

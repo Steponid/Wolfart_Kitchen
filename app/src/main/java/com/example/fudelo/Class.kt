@@ -1,11 +1,11 @@
-package com.example.fudelo.ui
+package com.example.fudelo
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Recipe(
-    val id: String,
+    val id: Int,
     val idType: String,
     val title: String,
     val description: String,

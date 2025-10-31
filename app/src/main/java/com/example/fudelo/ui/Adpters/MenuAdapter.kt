@@ -1,4 +1,4 @@
-package com.example.fudelo.ui.Home
+package com.example.fudelo.ui.Adpters
 
 import android.view.LayoutInflater
 import android.view.View

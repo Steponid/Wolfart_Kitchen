@@ -7,7 +7,7 @@ import android.webkit.WebViewClient
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.fudelo.R
-import com.example.fudelo.ui.Recipe
+import com.example.fudelo.Recipe
 
 class LastFragment : Fragment() {
     private lateinit var recipe: Recipe

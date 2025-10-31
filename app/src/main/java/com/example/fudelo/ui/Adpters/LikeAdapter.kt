@@ -1,4 +1,4 @@
-package com.example.fudelo.ui.Home
+package com.example.fudelo.ui.Adpters
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.fudelo.R
-import com.example.fudelo.ui.Recipe
+import com.example.fudelo.Recipe
 import com.example.fudelo.ui.page.Page
 
 class FavoriteAdapter(

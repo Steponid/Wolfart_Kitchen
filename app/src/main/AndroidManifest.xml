@@ -20,7 +20,7 @@
             android:name=".ui.page.Page"
             android:exported="false" />
         <activity
-            android:name=".ButNav"
+            android:name=".ui.ButNav"
             android:exported="false"
             android:windowSoftInputMode="stateHidden" />
         <activity

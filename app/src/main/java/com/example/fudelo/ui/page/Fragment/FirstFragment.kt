@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.core.content.edit
 import com.bumptech.glide.Glide
 import com.example.fudelo.R
-import com.example.fudelo.R.color.accent
 
-import com.example.fudelo.ui.Recipe
+import com.example.fudelo.Recipe
 
 class FirstFragment : Fragment() {
     private lateinit var recipe: Recipe
